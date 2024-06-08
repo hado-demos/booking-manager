@@ -31,3 +31,13 @@ jobs:
                 docker build -t booking-manager .
                 docker tag booking-manager:latest 058264348381.dkr.ecr.us-east-1.amazonaws.com/booking-manager:latest
                 docker push 058264348381.dkr.ecr.us-east-1.amazonaws.com/booking-manager:latest
+            - name: Download task definition
+              run: |
+                aws ecs describe-task-definition --task-definition my-task-definition-family --query taskDefinition > task-definition.json
+            - name: Deploy to Amazon ECS
+              uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+              with:
+                task-definition: task-definition.json
+                service: booking-manager
+                cluster: CheLagarto-UAT-CLUSTER
+                wait-for-service-stability: true
