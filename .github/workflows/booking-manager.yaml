@@ -33,6 +33,7 @@ jobs:
                 docker tag booking-manager:latest 058264348381.dkr.ecr.us-east-1.amazonaws.com/booking-manager:latest
                 docker push 058264348381.dkr.ecr.us-east-1.amazonaws.com/booking-manager:latest
                 echo "image=058264348381.dkr.ecr.us-east-1.amazonaws.com/booking-manager:latest" >> $GITHUB_OUTPUT
+            
             - name: Fill in the new image ID in the Amazon ECS task definition
               id: task-def
               uses: aws-actions/amazon-ecs-render-task-definition@v1
@@ -40,6 +41,7 @@ jobs:
                 task-definition: task-definition.json
                 container-name: booking-manager
                 image: ${{ steps.build-image.outputs.image }}
+                
             - name: Deploy Amazon ECS task definition
               uses: aws-actions/amazon-ecs-deploy-task-definition@v1
               with:
