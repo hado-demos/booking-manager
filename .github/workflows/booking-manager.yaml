@@ -25,6 +25,7 @@ jobs:
               uses: aws-actions/amazon-ecr-login@v1
 
             - name: Build and Push to ECR
+              id: build-image
               env:
                 AWS_ROLE_ARN: arn:aws:iam::058264348381:role/CheLagarto-ECR-Role
               run: |
