@@ -1,0 +1,18 @@
+{
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "family": "CheLagarto",
+    "containerDefinitions": [
+        {
+            "name": "booking-manager",
+            "image": "058264348381.dkr.ecr.us-east-1.amazonaws.com/booking-manager:latest",
+            "essential": true
+        }
+    ],
+    "volumes": [],
+    "networkMode": "awsvpc",
+    "memory": "3 GB",
+    "cpu": "1 vCPU",
+    "executionRoleArn": "arn:aws:iam::058264348381:role/ecsTaskExecutionRole"
+}
